@@ -1,0 +1,71 @@
+import java.util.Scanner;
+
+public class Main {
+
+    /**
+     * Chay ham main de chay chuong trinh
+     * 1. Nhap mang 2 chieu
+     * 2. Nhap phan tu tim kiem
+     * 3. Kiem tra va in ra man hinh vi tri
+     */
+    public static void main(String[] args) {
+        Main main = new Main();
+        int[][] mangHaiChieu = main.nhapMangHaiChieu();
+        int[] arrPhanTuTimKiem = main.nhapPhanTu();
+        for (int i = 0; i < arrPhanTuTimKiem.length; i++) {
+            main.inRaManHinh(mangHaiChieu, arrPhanTuTimKiem[i]);
+        }
+    }
+
+    /**
+     * Nhap mang 2 chieu co do dai 8, 8 sau do nhap gia tri tuong ung tu 1 -> 64 cho cac vi tri trong mang
+     */
+    public int[][] nhapMangHaiChieu() {
+        int[][] mangHaiChieu = new int[8][8];
+        int value = 1;
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                mangHaiChieu[i][j] = value;
+                value++;
+            }
+        }
+        return mangHaiChieu;
+    }
+
+    /**
+     * Nhap so luong so can biet vi tri vao
+     * Sau do, nhap lan luot cac so can biet vi tri vao
+     */
+    public int[] nhapPhanTu() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Nhập số lượng số cần biết vị trí: ");
+        int soLuong = scanner.nextInt();
+        int[] arrSo = new int[soLuong];
+        for (int i = 1; i <= soLuong; i++) {
+            System.out.println("Nhập số thứ " + i + ": ");
+            arrSo[i - 1] = scanner.nextInt();
+        }
+        return arrSo;
+    }
+
+    /**
+     * Kiem tra gia tri tim kiem co trong mang 2 chieu khong?
+     * Neu co thi in ra man hinh vi tri cua gia tri do trong mang
+     * Neu khong co thi in ra thong bao khong tim thay
+     */
+    public void inRaManHinh(int[][] mangHaiChieu, int giaTriTimKiem) {
+        boolean isCheck = false;
+        for (int i = 0; i < mangHaiChieu.length; i++) {
+            for (int j = 0; j < mangHaiChieu.length; j++) {
+                if (mangHaiChieu[i][j] == giaTriTimKiem) {
+                    System.out.println("Giá trị " + giaTriTimKiem + " nằm ở vị trí: " + "hàng " + (i + 1) + ", cột " + (j + 1));
+                    isCheck = true;
+                }
+            }
+        }
+        if (!isCheck) {
+            System.out.println("Không tìm thấy giá trị " + giaTriTimKiem);
+        }
+    }
+
+}
